@@ -1,11 +1,15 @@
 import { Link } from "react-router";
+import styles from "./Header.module.css";
 
 const Header = () => {
   return (
     <>
-      <header>
+      <header className={styles.header}>
+        <div>
+          <p>LOGO</p>
+        </div>
         <nav>
-          <ul>
+          <ul className={styles.list}>
             <li>
               <Link to="/">Accueil</Link>
             </li>

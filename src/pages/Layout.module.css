@@ -1,0 +1,9 @@
+.layout {
+  background-color: antiquewhite;
+  /*margin-inline: 10%;*/
+  min-height: 100vh;
+}
+
+.content {
+  padding-inline: 10%;
+}

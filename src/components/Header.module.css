@@ -1,0 +1,18 @@
+.header {
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.list {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.list * {
+  text-decoration: none;
+  list-style: none;
+  color: black;
+}

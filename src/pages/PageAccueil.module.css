@@ -1,0 +1,14 @@
+.title {
+  margin-block: 30px;
+}
+
+.subtitle {
+  font-weight: normal;
+  margin-block: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
