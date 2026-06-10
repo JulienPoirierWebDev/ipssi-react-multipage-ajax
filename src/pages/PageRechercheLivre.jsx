@@ -7,6 +7,7 @@ const PageRechercheLivre = () => {
   const [recherche, setRecherche] = useState("");
   const [resultat, setResultat] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
   const handleChange = (event) => {
     setResultat(null);
     setRecherche(event.target.value);
@@ -18,7 +19,7 @@ const PageRechercheLivre = () => {
     const timer = setTimeout(async () => {
       if (recherche !== "" && recherche.length >= 3) {
         setLoading(true);
-        const data = await searchBooks(recherche);
+        const data = await searchBooks(recherche, page);
         if (recherche !== "") {
           setResultat(data);
           setLoading(false);
@@ -30,7 +31,7 @@ const PageRechercheLivre = () => {
       setLoading(false);
       clearInterval(timer);
     };
-  }, [recherche]);
+  }, [recherche, page]);
 
   return (
     <>
@@ -56,6 +57,31 @@ const PageRechercheLivre = () => {
           {recherche !== "" && <p>Ma recherche est : {recherche}</p>}
         </form>
         {loading && <p>Chargement</p>}
+
+        {resultat && (
+          <>
+            <button
+              onClick={() => {
+                if (page > 1) {
+                  setResultat(null);
+                  setPage(page - 1);
+                }
+              }}
+            >
+              Précédent
+            </button>
+            <button
+              onClick={() => {
+                setResultat(null);
+                setPage(page + 1);
+              }}
+            >
+              Suivant
+            </button>
+
+            {page}
+          </>
+        )}
         {resultat &&
           resultat.docs?.map((book) => {
             return <CardBook key={book.key} book={book} />;

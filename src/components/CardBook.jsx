@@ -26,7 +26,14 @@ const CardBook = ({ book }) => {
           </ul>
         </CardContent>
         <CardFooter>
-          <Button variant="outline" size="sm" className="w-full">
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full"
+            onClick={() => {
+              console.log("hey");
+            }}
+          >
             En savoir plus
           </Button>
         </CardFooter>
