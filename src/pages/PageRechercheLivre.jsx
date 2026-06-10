@@ -1,37 +1,10 @@
-import { useEffect, useState } from "react";
+import SearchNavigation from "@/components/SearchNavigation";
 import CardBook from "../components/CardBook";
-import { searchBooks } from "../services/openLibraryService";
+import useSearchBook from "./../hooks/useSearchBook.js";
 
 const PageRechercheLivre = () => {
-  console.log("JE SUIS RENDER");
-  const [recherche, setRecherche] = useState("");
-  const [resultat, setResultat] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const handleChange = (event) => {
-    setResultat(null);
-    setRecherche(event.target.value);
-
-    // faire la requete et sauvegarder son résultat dans une variable résultatRecherche
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(async () => {
-      if (recherche !== "" && recherche.length >= 3) {
-        setLoading(true);
-        const data = await searchBooks(recherche, page);
-        if (recherche !== "") {
-          setResultat(data);
-          setLoading(false);
-        }
-      }
-    }, 400);
-
-    return () => {
-      setLoading(false);
-      clearInterval(timer);
-    };
-  }, [recherche, page]);
+  const { handleChange, recherche, loading, resultat, page, setPage, isPageMax, pageMax } =
+    useSearchBook();
 
   return (
     <>
@@ -59,30 +32,11 @@ const PageRechercheLivre = () => {
         {loading && <p>Chargement</p>}
 
         {resultat && (
-          <>
-            <button
-              onClick={() => {
-                if (page > 1) {
-                  setResultat(null);
-                  setPage(page - 1);
-                }
-              }}
-            >
-              Précédent
-            </button>
-            <button
-              onClick={() => {
-                setResultat(null);
-                setPage(page + 1);
-              }}
-            >
-              Suivant
-            </button>
-
-            {page}
-          </>
+          <SearchNavigation page={page} setPage={setPage} isPageMax={isPageMax} pageMax={pageMax} />
         )}
+
         {resultat &&
+          !loading &&
           resultat.docs?.map((book) => {
             return <CardBook key={book.key} book={book} />;
           })}

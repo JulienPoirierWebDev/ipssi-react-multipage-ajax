@@ -1,3 +1,4 @@
+import PageAuteur from "@/pages/PageAuteur";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter } from "react-router";
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/rechercher-un-livre",
         element: <PageRechercheLivre />,
+      },
+      {
+        path: "/auteur/:key",
+        element: <PageAuteur />,
       },
     ],
   },
